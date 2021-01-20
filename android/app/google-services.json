@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "478297807357",
+    "project_id": "heybuddy-58127",
+    "storage_bucket": "heybuddy-58127.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478297807357:android:14b928fb6e54205193e194",
+        "android_client_info": {
+          "package_name": "com.example.heybuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478297807357-jft9d3rjstcqmhh5tdabm5jbt3st1877.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzqdGcq4t8C66LmpflOrfl0Y94DcrvI2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478297807357-jft9d3rjstcqmhh5tdabm5jbt3st1877.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
