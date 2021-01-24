@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../picker/user_image_picker.dart';
@@ -6,8 +7,14 @@ class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
 
   final bool isLoading;
-  final void Function(String email, String username, String password,
-      bool _isLogin, BuildContext ctx) submitFn;
+  final void Function(
+    String email,
+    String username,
+    String password,
+    File image,
+    bool _isLogin,
+    BuildContext ctx,
+  ) submitFn;
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -19,16 +26,38 @@ class _AuthFormState extends State<AuthForm> {
   String _userEmail = '';
   String _userName = '';
   String _userPassword = '';
+  File _userImageFile;
+
+  void pickImage(File image) {
+    _userImageFile = image;
+  }
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
-    if (isValid) {
-      _formKey.currentState.save();
+
+    if (_userImageFile == null && !_isLogin) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please pick na image'),
+          backgroundColor: Theme.of(context).errorColor,
+        ),
+      );
+
+      return;
     }
 
-    widget.submitFn(_userEmail.trim(), _userName.trim(), _userPassword.trim(),
-        _isLogin, context);
+    if (isValid) {
+      _formKey.currentState.save();
+      widget.submitFn(
+        _userEmail.trim(),
+        _userName.trim(),
+        _userPassword.trim(),
+        _userImageFile,
+        _isLogin,
+        context,
+      );
+    }
   }
 
   @override
@@ -43,7 +72,7 @@ class _AuthFormState extends State<AuthForm> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (!_isLogin) UserImagePicker(),
+                if (!_isLogin) UserImagePicker(pickImage),
                 TextFormField(
                   key: ValueKey('email'),
                   validator: (value) {
