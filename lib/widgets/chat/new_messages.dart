@@ -40,6 +40,9 @@ class _NewMessageState extends State<NewMessage> {
           Expanded(
             child: TextField(
               controller: _controller,
+              autocorrect: true,
+              textCapitalization: TextCapitalization.sentences,
+              enableSuggestions: false,
               decoration: InputDecoration(labelText: 'Send a message...'),
               onChanged: (value) {
                 setState(() {
